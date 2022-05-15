@@ -22,7 +22,7 @@ module pipeline_reg(
 
     always @(posedge clk_i or negedge rst_ni) begin
         if (rst_ni == 1'b0) begin
-            bram1_web_o         <= 1'b0
+            bram1_web_o         <= 1'b0;
             bram1_w_addr_o      <= 5'b0;
             alumode_o           <= 4'b0;
             opmode_o            <= 7'b0;
