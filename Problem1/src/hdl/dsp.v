@@ -37,7 +37,7 @@ DSP48E1 #(
 	.INMODEREG(1), // Number of pipeline stages for INMODE (0 or 1)
 	.MREG(1), // Number of multiplier pipeline stages (0 or 1)
 	.OPMODEREG(1), // Number of pipeline stages for OPMODE (0 or 1)
-	.PREG(0) // Number of pipeline stages for P (0 or 1)
+	.PREG(1) // Number of pipeline stages for P (0 or 1)
 )
 DSP48E1_inst (
 	// Cascade: 30-bit (each) output: Cascade Ports
