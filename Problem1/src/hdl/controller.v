@@ -28,7 +28,8 @@ module controller(
 
     always @(posedge clk_i or negedge rst_ni) begin
         if (rst_ni == 1'b0) begin
-            c_state <= IDLE;
+            c_state        <= IDLE;
+            counter        <= 2'd0;
             bram1_web_o    <= 1'b0;
             bram1_reb_o    <= 1'b0;
             bram0_reb_o    <= 1'b0;
