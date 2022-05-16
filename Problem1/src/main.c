@@ -21,8 +21,11 @@ u32 get_cmd(
     return cmd;
 }
 
-void wait() {
-    while (!Xil_In32(XPAR_AXI_GPIO_2_BASEADDR));
+void execute(u32 cmd) {
+    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd); 
+    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, 1);  // START 
+    while (!Xil_In32(XPAR_AXI_GPIO_2_BASEADDR));  // wait for valid
+    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, 0);  // CLEAR 
     return;
 }
 
@@ -30,29 +33,19 @@ int main() {
     u32 cmd = 0;
     
     // BRAM[3] <= BRAM0[0] * BRAM1[2]
-    cmd = get_cmd(0, 2, 3, 0b10001, 0b0000101, 0b0000);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(0, 2, 3, 0b10001, 0b0000101, 0b0000));
     
     // BRAM[7] <= BRAM0[11] * BRAM1[3]
-    cmd = get_cmd(11, 3, 7, 0b10001, 0b0000101, 0b0000);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(11, 3, 7, 0b10001, 0b0000101, 0b0000));
     
     // BRAM[10] <= BRAM0[31] * BRAM1[7] + C
-    cmd = get_cmd(31, 7, 10, 0b10001, 0b0110101, 0b0000);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(31, 7, 10, 0b10001, 0b0110101, 0b0000));
 
     // BRAM[13] <= C - BRAM0[1] * BRAM1[6]
-    cmd = get_cmd(1, 6, 13, 0b10001, 0b0110101, 0b0011);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(1, 6, 13, 0b10001, 0b0110101, 0b0011));
 
     // BRAM[15] <= BRAM[0] * BRAM[1] - C - 1
-    cmd = get_cmd(0, 1, 15, 0b10001, 0b0110101, 0b0001);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(0, 1, 15, 0b10001, 0b0110101, 0b0001));
 
     for (int i = 0; i < 32; ++i) {
         u32 bram_read;
@@ -65,29 +58,19 @@ int main() {
     }
     
     // BRAM[16] <= BRAM0[0] * BRAM1[2]
-    cmd = get_cmd(0, 2, 16, 0b10001, 0b0000101, 0b0000);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(0, 2, 16, 0b10001, 0b0000101, 0b0000));
     
     // BRAM[17] <= BRAM0[11] * BRAM1[3]
-    cmd = get_cmd(11, 3, 17, 0b10001, 0b0000101, 0b0000);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(11, 3, 17, 0b10001, 0b0000101, 0b0000));
     
     // BRAM[18] <= BRAM0[31] * BRAM1[7] + C
-    cmd = get_cmd(31, 7, 18, 0b10001, 0b0110101, 0b0000);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(31, 7, 18, 0b10001, 0b0110101, 0b0000));
 
     // BRAM[19] <= C - BRAM0[1] * BRAM1[6]
-    cmd = get_cmd(1, 6, 19, 0b10001, 0b0110101, 0b0011);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(1, 6, 19, 0b10001, 0b0110101, 0b0011));
 
     // BRAM[20] <= BRAM[0] * BRAM[1] - C - 1
-    cmd = get_cmd(0, 1, 20, 0b10001, 0b0110101, 0b0001);
-    Xil_Out32(XPAR_AXI_GPIO_0_BASEADDR, cmd);
-    wait();
+    execute(get_cmd(0, 1, 20, 0b10001, 0b0110101, 0b0001));
 
     for (int i = 0; i < 32; ++i) {
         u32 bram_read;
