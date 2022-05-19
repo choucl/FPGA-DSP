@@ -24,12 +24,12 @@ module controller(
 
     reg [1:0] c_state;
     reg [1:0] n_state;
-    reg [1:0] counter;
+    reg [3:0] counter;
 
     always @(posedge clk_i or negedge rst_ni) begin
         if (rst_ni == 1'b0) begin
             c_state        <= IDLE;
-            counter        <= 2'd0;
+            counter        <= 3'd0;
             bram1_web_o    <= 1'b0;
             bram1_reb_o    <= 1'b0;
             bram0_reb_o    <= 1'b0;
@@ -44,7 +44,7 @@ module controller(
             c_state <= n_state;
             case (c_state)
                 IDLE: begin 
-                    counter <= 2'd0;
+                    counter <= 3'd0;
                 end                   
                 DECODE: begin
                     bram1_web_o    <= instruction_i[`EXEC];
@@ -58,7 +58,7 @@ module controller(
                     bram0_r_addr_o <= instruction_i[`BRAM0_R_ADDR];
                 end
                 EXECUTE: begin
-                    counter     <= counter + 2'd1;
+                    counter     <= counter + 3'd1;
                     bram1_web_o <= 1'b0; // prevent from writing dirty data
                 end
             endcase
@@ -76,7 +76,7 @@ module controller(
                 valid_o = 1'b0;
             end
             EXECUTE: begin
-                n_state = (counter == 2'd2) ? DONE : EXECUTE; // instruction needs 3 cycles to do.
+                n_state = (counter == 3'd10) ? DONE : EXECUTE; // instruction needs 3 cycles to do.
                 valid_o = 1'b0;
             end
             DONE: begin
