@@ -1,14 +1,14 @@
 module dsp_direct(
 	input clk,
-	input [29:0] A,
-	input [17:0] B,
+	input [31:0] A,
+	input [31:0] B,
 	input [4:0] INMODE,
 	input [3:0] ALUMODE,
 	input [6:0] OPMODE,
-	output [47:0] P
-	
+	output [31:0] P
 );
-
+wire [47:0] P_tmp;
+assign P = P_tmp[31:0];
 DSP48E1 #(
 	// Feature Control Attributes: Data Path Selection
 	.A_INPUT("DIRECT"), // Selects A input source, "DIRECT" (A port) or "CASCADE" (ACIN port)
@@ -53,7 +53,7 @@ DSP48E1_inst (
 	.UNDERFLOW(), // 1-bit output: Underflow in add/acc output
 	// Data: 4-bit (each) output: Data Ports
 	.CARRYOUT(), // 4-bit output: Carry output
-	.P(P), // 48-bit output: Primary data output
+	.P(P_tmp), // 48-bit output: Primary data output
 	// Cascade: 30-bit (each) input: Cascade Ports
 	.ACIN(), // 30-bit input: A cascade data input
 	.BCIN(), // 18-bit input: B cascade input
@@ -67,8 +67,8 @@ DSP48E1_inst (
 	.INMODE(INMODE), // 5-bit input: INMODE control input
 	.OPMODE(OPMODE), // 7-bit input: Operation mode input
 	// Data: 30-bit (each) input: Data Ports
-	.A(A), // 30-bit input: A data input
-	.B(B), // 18-bit input: B data input
+	.A(A[29:0]), // 30-bit input: A data input
+	.B(B[17:0]), // 18-bit input: B data input
 	.C(48'h000000095514), // 48-bit input: C data input
 	.CARRYIN(0), // 1-bit input: Carry input signal
 	.D(), // 25-bit input: D data input
