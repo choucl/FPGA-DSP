@@ -1,0 +1,107 @@
+00:00:02 INFO  : Registering command handlers for Vitis TCF services
+00:00:02 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\Xilinx\Vivado_Project\hw5_vitis\temp_xsdb_launch_script.tcl
+00:00:04 INFO  : Platform repository initialization has completed.
+00:00:04 INFO  : XSCT server has started successfully.
+00:00:04 INFO  : plnx-install-location is set to ''
+00:00:05 INFO  : Successfully done setting XSCT server connection channel  
+00:00:05 INFO  : Successfully done query RDI_DATADIR 
+00:00:05 INFO  : Successfully done setting workspace for the tool. 
+00:00:32 INFO  : Result from executing command 'getProjects': design_1_wrapper
+00:00:32 INFO  : Result from executing command 'getPlatforms': 
+00:00:32 WARN  : An unexpected exception occurred in the module 'platform project logging'
+00:00:32 INFO  : Platform 'design_1_wrapper' is added to custom repositories.
+00:00:39 INFO  : Platform 'design_1_wrapper' is added to custom repositories.
+00:01:07 INFO  : Result from executing command 'getProjects': design_1_wrapper
+00:01:07 INFO  : Result from executing command 'getPlatforms': design_1_wrapper|C:/Xilinx/Vivado_Project/hw5_vitis/design_1_wrapper/export/design_1_wrapper/design_1_wrapper.xpfm
+00:01:07 INFO  : Checking for BSP changes to sync application flags for project 'fpga_dsp'...
+00:01:35 INFO  : Checking for BSP changes to sync application flags for project 'fpga_dsp'...
+00:01:50 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+00:01:51 INFO  : Jtag cable 'Xilinx TUL 1234-tulA' is selected.
+00:01:51 INFO  : 'jtag frequency' command is executed.
+00:01:51 INFO  : Context for 'APU' is selected.
+00:01:51 INFO  : System reset is completed.
+00:01:54 INFO  : 'after 3000' command is executed.
+00:01:54 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx TUL 1234-tulA" && level==0 && jtag_device_ctx=="jsn-TUL-1234-tulA-23727093-0"}' command is executed.
+00:01:56 INFO  : Device configured successfully with "C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/_ide/bitstream/design_1_wrapper.bit"
+00:01:56 INFO  : Context for 'APU' is selected.
+00:01:56 INFO  : Hardware design and registers information is loaded from 'C:/Xilinx/Vivado_Project/hw5_vitis/design_1_wrapper/export/design_1_wrapper/hw/design_1_wrapper.xsa'.
+00:01:56 INFO  : 'configparams force-mem-access 1' command is executed.
+00:01:56 INFO  : Context for 'APU' is selected.
+00:01:56 INFO  : Sourcing of 'C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/_ide/psinit/ps7_init.tcl' is done.
+00:01:57 INFO  : 'ps7_init' command is executed.
+00:01:57 INFO  : 'ps7_post_config' command is executed.
+00:01:57 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+00:01:57 INFO  : The application 'C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/Debug/fpga_dsp.elf' is downloaded to processor 'ps7_cortexa9_0'.
+00:01:57 INFO  : 'configparams force-mem-access 0' command is executed.
+00:01:57 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx TUL 1234-tulA" && level==0 && jtag_device_ctx=="jsn-TUL-1234-tulA-23727093-0"}
+fpga -file C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/_ide/bitstream/design_1_wrapper.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/Xilinx/Vivado_Project/hw5_vitis/design_1_wrapper/export/design_1_wrapper/hw/design_1_wrapper.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/Debug/fpga_dsp.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+00:01:57 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+00:01:57 INFO  : 'con' command is executed.
+00:01:57 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+00:01:57 INFO  : Disconnected from the channel tcfchan#2.
+00:02:02 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+00:02:02 INFO  : Jtag cable 'Xilinx TUL 1234-tulA' is selected.
+00:02:02 INFO  : 'jtag frequency' command is executed.
+00:02:02 INFO  : Context for 'APU' is selected.
+00:02:02 INFO  : System reset is completed.
+00:02:05 INFO  : 'after 3000' command is executed.
+00:02:05 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx TUL 1234-tulA" && level==0 && jtag_device_ctx=="jsn-TUL-1234-tulA-23727093-0"}' command is executed.
+00:02:08 INFO  : Device configured successfully with "C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/_ide/bitstream/design_1_wrapper.bit"
+00:02:08 INFO  : Context for 'APU' is selected.
+00:02:08 INFO  : Hardware design and registers information is loaded from 'C:/Xilinx/Vivado_Project/hw5_vitis/design_1_wrapper/export/design_1_wrapper/hw/design_1_wrapper.xsa'.
+00:02:08 INFO  : 'configparams force-mem-access 1' command is executed.
+00:02:08 INFO  : Context for 'APU' is selected.
+00:02:08 INFO  : Sourcing of 'C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/_ide/psinit/ps7_init.tcl' is done.
+00:02:08 INFO  : 'ps7_init' command is executed.
+00:02:08 INFO  : 'ps7_post_config' command is executed.
+00:02:08 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+00:02:09 INFO  : The application 'C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/Debug/fpga_dsp.elf' is downloaded to processor 'ps7_cortexa9_0'.
+00:02:09 INFO  : 'configparams force-mem-access 0' command is executed.
+00:02:09 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx TUL 1234-tulA" && level==0 && jtag_device_ctx=="jsn-TUL-1234-tulA-23727093-0"}
+fpga -file C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/_ide/bitstream/design_1_wrapper.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/Xilinx/Vivado_Project/hw5_vitis/design_1_wrapper/export/design_1_wrapper/hw/design_1_wrapper.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/Xilinx/Vivado_Project/hw5_vitis/fpga_dsp/Debug/fpga_dsp.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+00:02:09 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+00:02:09 INFO  : 'con' command is executed.
+00:02:09 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+00:02:09 INFO  : Disconnected from the channel tcfchan#3.
