@@ -43,8 +43,8 @@ int main() {
     // BRAM[13] <= C - BRAM0[1] * BRAM1[6]
     execute(get_cmd(1, 6, 13, 0b10001, 0b0110101, 0b0011));
 
-    // BRAM[15] <= BRAM0[0] * BRAM1[1] - C - 1
-    execute(get_cmd(0, 1, 15, 0b10001, 0b0110101, 0b0001));
+    // BRAM[15] <= BRAM0[0] * BRAM1[31] - C - 1
+    execute(get_cmd(0, 31, 15, 0b10001, 0b0110101, 0b0001));
 
     printf("--------------------------------------------\n");
     for (int i = 0; i < 32; ++i) {
@@ -69,8 +69,8 @@ int main() {
     // BRAM[19] <= C - BRAM0[1] * BRAM1[6]
     execute(get_cmd(1, 6, 19, 0b10001, 0b0110101, 0b0011));
 
-    // BRAM[20] <= BRAM0[0] * BRAM1[1] - C - 1
-    execute(get_cmd(0, 1, 20, 0b10001, 0b0110101, 0b0001));
+    // BRAM[20] <= BRAM0[0] * BRAM1[31] - C - 1
+    execute(get_cmd(0, 31, 20, 0b10001, 0b0110101, 0b0001));
 
     printf("--------------------------------------------\n");
     for (int i = 0; i < 32; ++i) {
