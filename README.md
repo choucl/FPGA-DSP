@@ -2,7 +2,7 @@
 
 > 2022 Spring NCKU FPGA Course
 >
-> Homework 4
+> Homework 5
 >
 > E24076239 E24076297 E24076750
 
@@ -22,7 +22,7 @@ This project uses **ZYNQ processor**, **block RAM**, and **DSP module** to imple
 
   * States
 
-    * `IDLE`: resetting `counter` to zero. If `start_i` pulls high, going to `DECODE` state
+    * `IDLE`: resetting `counter` to zero. If `start_i` pulls high, going to state `DECODE`
 
     * `DECODE`:
 
@@ -32,17 +32,17 @@ This project uses **ZYNQ processor**, **block RAM**, and **DSP module** to imple
           | ----------------------------------------: | ----------- | ---------- | ---------- | ---------------- | ---------------- | ---------------- |
           | `bram1_web_o` & `bram1_eb_o` & `bram0_reb_o` | `alumode_o` | `opmode_o` | `inmode_o` | `bram1_w_addr_o` | `bram1_r_addr_o` | `bram0_r_addr_o` |
 
-      * Going to `EXECUTE` state
+      * Going to  state `EXECUTE` state
 
     * `EXECUTE`:
 
       * Using `counter` to count the execution cycles of current instruction
-      * Going to `DONE` state
+      * Going to state `DONE`
 
     * `DONE`
 
       * Pulling `valid_o` to high
-      * Going to `IDLE` state while `start_i` is low
+      * Going to state `IDLE` while `start_i` is low
 
 * pipeline_reg
 
@@ -99,6 +99,24 @@ This project uses **ZYNQ processor**, **block RAM**, and **DSP module** to imple
     | **INMODEREG** | 1 |
     | **OPMODEREG** | 1 |
 
+
+
+## Communication
+
+![timing](images/timing.png)
+
+Below are more detailed descriptions of the communication and behavior of PS and controller. 
+
+| PS                  | controller      |
+| ------------------- | --------------- |
+| Send an instruction | In state `IDLE` |
+| Send a start signal |  |
+| |  Receives the start signal from PS, then enters the `decode` state |
+| |  Decode the instruction, then enters the `EXECUTE` state |
+|                     | Waits for DSP to finish the execution |
+| | Enter the `DONE` state, then sends a valid signal to PS |
+| Receive the valid signal from controller | |
+| Sends a clear signal | Returns to the `IDLE` state |
 
 
 
