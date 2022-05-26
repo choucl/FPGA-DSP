@@ -109,13 +109,13 @@ Below are more detailed descriptions of the communication and behavior of PS and
 
 | PS                  | controller      |
 | ------------------- | --------------- |
-| Send an instruction | In state `IDLE` |
-| Send a start signal |  |
+| Sends an instruction | In state `IDLE` |
+| Sends a start signal |  |
 | |  Receives the start signal from PS, then enters the `decode` state |
-| |  Decode the instruction, then enters the `EXECUTE` state |
+| | Decodes the instruction, then enters the `EXECUTE` state |
 |                     | Waits for DSP to finish the execution |
-| | Enter the `DONE` state, then sends a valid signal to PS |
-| Receive the valid signal from controller | |
+| | Enters the `DONE` state, then sends a valid signal to PS |
+| Receives the valid signal from controller | |
 | Sends a clear signal | Returns to the `IDLE` state |
 
 
